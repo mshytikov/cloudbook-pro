@@ -1,6 +1,7 @@
 SHELL := /bin/bash
 INSTANCE := $(shell uname)
 INFRASTRUCTURE := "./cloudbook-pro/gcloud/infrastructure"
+gcloud := dgcp gcloud
 
 default: readme
 
@@ -11,20 +12,20 @@ readme:
 
 cloudbook-pro-create:
 	cd $(INFRASTRUCTURE) && \
-	gcloud deployment-manager deployments create $$CLOUDBOOK_PRO_DEPLOYMENT \
+	$(gcloud) deployment-manager deployments create $$CLOUDBOOK_PRO_DEPLOYMENT \
 		--config cloudbook-pro.yml
 
 cloudbook-pro-update:
 	cd $(INFRASTRUCTURE) && \
-		gcloud deployment-manager deployments update $$CLOUDBOOK_PRO_DEPLOYMENT \
+		$(gcloud) deployment-manager deployments update $$CLOUDBOOK_PRO_DEPLOYMENT \
 		--config cloudbook-pro.yml
 
 cloudbook-pro-delete:
-	gcloud deployment-manager deployments delete $$CLOUDBOOK_PRO_DEPLOYMENT
+	$(gcloud) deployment-manager deployments delete $$CLOUDBOOK_PRO_DEPLOYMENT
 
 cloudbook-pro-show:
-	gcloud compute instances list	--filter=$$CLOUDBOOK_PRO_DEPLOYMENT
-	gcloud deployment-manager deployments list \
+	$(gcloud) compute instances list	--filter=$$CLOUDBOOK_PRO_DEPLOYMENT
+	$(gcloud) deployment-manager deployments list \
 		--filter=$$CLOUDBOOK_PRO_DEPLOYMENT
 
 cloudbook-pro-set-machine-type:
@@ -38,7 +39,7 @@ dvim-setup:
 	docker build -t mshytikov/dvim:$$UID --build-arg UID=$$UID ./docker/dvim/local
 
 dotfiles-setup:
-	rm  ~/.bashrc
+	rm -rf  ~/.bashrc
 	mkdir -p ~/bin
 	stow --target ~/bin -v  bin
 	stow --dir=dotfiles --target ~ -v bash
@@ -53,7 +54,6 @@ macbook-pro-setup:
 
 cloudbook-pro-docker-setup:
 	which docker || cloudbook-pro/docker/setup
-	docker run hello-world
 
 cloudbook-pro-setup: | cloudbook-pro-docker-setup
 	sudo apt-get install git
@@ -65,11 +65,12 @@ secrets-setup:
 	mkdir -p $$MYBASH_SECRETS_DIR
 	mkdir -p $$MYBASH_SECRETS_DIR/gcp
 	mkdir -p $$MYBASH_SECRETS_DIR/mybash
+	echo "Hello World" > $$MYBASH_SECRETS_DIR/mybash/hello
 	chmod 700 $$MYBASH_SECRETS_DIR
 
 instance-setup:
 ifeq ($(INSTANCE), Darwin)
-instance-setup: | macbook-pro-setup  secrets-setup dotfiles-setup dvim-setup
+instance-setup: | macbook-pro-setup  dotfiles-setup dvim-setup
 else
-instance-setup: | cloudbook-pro-setup secrets-setup dotfiles-setup dvim-setup
+instance-setup: | cloudbook-pro-setup dotfiles-setup dvim-setup
 endif

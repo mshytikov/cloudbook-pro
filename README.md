@@ -19,6 +19,11 @@ Setup instance
   make instance-setup
 ```
 
+Restart terminal
+```
+  make secrets-setup
+```
+
 Activate gcloud
 ```
 dgcp gcloud auth login
@@ -36,7 +41,7 @@ make cloudbook-pro-create
 
 ssh to the instance
 ```
-ssh -A $(cloudbook ip)
+cloudbook-pro ssh
 ```
 
 checkout project
@@ -47,6 +52,11 @@ git clone https://github.com/mshytikov/cloudbook-pro.git && cd cloudbook-pro
 Setup instance
 ```
   make instance-setup
+```
+
+Restart terminal
+```
+  make secrets-setup
 ```
 
 ### Delete cloudbook-pro

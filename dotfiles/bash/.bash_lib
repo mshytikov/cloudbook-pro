@@ -26,13 +26,16 @@ alias l='ls -CF'
 # Google Cloud Platform
 ###############################################################################
 
-gci() { dgcp gcloud compute instances $@; }
-gcd() { dgcp gcloud compute disks $@; }
+gcloud() { dgcp gcloud $@; }
+
+gci() { gcloud compute instances $@; }
+gcd() { gcloud compute disks $@; }
+
 
 # Returns public IP of the instance: gci-ip INSTANCE-NAME
 gci-ip() {
-  gci describe $@ --format=json | \
-  jq --raw-output ".networkInterfaces[0].accessConfigs[0].natIP"
+  gci describe $@ --format=json \
+    | jq --raw-output ".networkInterfaces[0].accessConfigs[0].natIP"
 }
 
 

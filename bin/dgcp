@@ -5,7 +5,7 @@
 
 uid=$(id -u)
 gid=$(id -g)
-docker run --rm -it \
+docker run --rm -i \
   -e HOME=$HOME \
   -w /hostfs/$(pwd) \
   -v /:/hostfs:rw \
