@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# Google Cloud Platform
+#
+
+uid=$(id -u)
+gid=$(id -g)
+docker run --rm -it \
+  -e HOME=$HOME \
+  -w /hostfs/$(pwd) \
+  -v /:/hostfs:rw \
+  -v $MYBASH_SECRETS_DIR/gcp/.config:$HOME/.config \
+  -v $MYBASH_SECRETS_DIR/gcp/.kube:$HOME/.kube \
+  -v $MYBASH_SECRETS_DIR/gcp/.gsutil:$HOME/.gsutil \
+  --user $uid:$gid \
+  google/cloud-sdk $@

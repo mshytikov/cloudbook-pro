@@ -1,0 +1,30 @@
+{% set deployment = env["deployment"] %}
+
+resources:
+- name: {{ env["name"] }}-allow-ssh
+  type: compute.v1.firewall
+  properties:
+    allowed:
+    - IPProtocol: TCP
+      ports: [ 22 ]
+    sourceRanges: {{ properties["ssh_ips"] }}
+    network: $(ref.{{ deployment }}-net.selfLink)
+
+- name: {{ env["name"] }}-allow-ssh-from-instance
+  type: compute.v1.firewall
+  properties:
+    allowed:
+    - IPProtocol: TCP
+      ports: [ 22 ]
+    sourceRanges:
+    -  $(ref.{{ deployment }}-ip.address)
+    network: projects/{{ env["project"] }}/global/networks/default
+
+#- name: {{ env["name"] }}-allow-mosh
+  #type: compute.v1.firewall
+  #properties:
+    #allowed:
+    #- IPProtocol: UDP
+      #ports: [ 60001 ]
+    #sourceRanges: $(ref.config.ssh_ips)
+    #network: $(ref.{{ env["deployment"] }}-net.selfLink)

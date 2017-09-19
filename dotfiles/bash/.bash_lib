@@ -1,0 +1,73 @@
+# vim: filetype=sh
+
+source ~/.bash_env && load_once || return 0
+
+# Set pager to less
+export PAGER="less"
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+###############################################################################
+# Google Cloud Platform
+###############################################################################
+
+gci() { dgcp gcloud compute instances $@; }
+gcd() { dgcp gcloud compute disks $@; }
+
+# Returns public IP of the instance: gci-ip INSTANCE-NAME
+gci-ip() {
+  gci describe $@ --format=json | \
+  jq --raw-output ".networkInterfaces[0].accessConfigs[0].natIP"
+}
+
+
+###############################################################################
+# Docker shortcuts
+###############################################################################
+alias d="docker"
+
+# Short-cut to exec bash in container: dbash CONTAINER
+dbash(){ docker exec -ti $1 bash; }
+
+dc() {
+  COMPOSE_OPTIONS="
+  -e UID=$UID
+  -e GID=${GROUPS[0]}
+  -e USER=$USER
+  -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK
+  " docker-compose $@
+}
+
+dc-run() { dc run --rm app $@ ;}
+dc-bash() { dc run --rm --entrypoint=bash app; }
+
+own-it() { sudo chown -Rv $UID:$GROUPS . ; }
+
+###############################################################################
+# MyBash secrets setup
+###############################################################################
+
+bash_secrets_init(){
+  for file in $MYBASH_SECRETS_DIR/mybash/*; do
+    local key=$(basename $file)
+    eval "mybash-$key(){ cat $file; }"
+    eval "mybash-$key-copy() { cat $file | pbcopy | echo '=> $key copied';}"
+  done
+}
+
+bash_secrets_init && unset bash_secrets_init

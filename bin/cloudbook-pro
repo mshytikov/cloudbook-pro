@@ -1,0 +1,108 @@
+#!/bin/bash
+
+source ~/.bash_env && load_once || return
+
+require  ~/.bash_lib
+
+USAGE="Usage: cloudbook-pro [start|stop|ip|ssh|mount]"
+# fast fail
+set -e
+
+instance="$CLOUDBOOK_PRO_DEPLOYMENT-instance"
+
+function scale {
+  log_info "[cloudbook-pro] scaling up to $1"
+  cloudbook-pro stop || true
+  cd $MYBASH_HOME && make cloudbook-pro-scale machine_type=$1
+  cloudbook-pro start
+}
+
+# sanity check
+[[ "$#" -eq 0 ]] && echo -e "Illegal number of parameters\n$USAGE" && exit 1
+
+while [[ $# > 0 ]]
+do
+  key="$1"
+
+  case $key in
+    -h|--help)
+      echo $USAGE
+      exit 1
+      ;;
+    info)
+      gci list --filter=$instance
+      shift
+      ;;
+    start)
+      gci start $instance
+      shift
+      ;;
+    stop)
+      gci stop $instance
+      shift
+      ;;
+    ip)
+      gci-ip $instance
+      shift
+      ;;
+    ssh)
+      ssh -C -A $(cloudbook-pro ip) -t tmux $2
+      shift
+      ;;
+    port)
+      ssh -N -L $2:127.0.0.1:$2 $(cloudbook-pro ip)
+      shift
+      ;;
+    env)
+      cmd="source ~/.bash_login && echo \$$2"
+      ssh $(cloudbook-pro ip) $cmd 2> /dev/null
+      shift
+      ;;
+    copy)
+      cmd="cat ~/dvim/s.reg"
+      ssh $(cloudbook-pro ip) $cmd | pbcopy
+      shift
+      ;;
+    mount)
+      mount_dir=~/mnt/cloudbook-pro
+      mkdir -p  $mount_dir
+      sshfs -o allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa \
+        $(cloudbook-pro ip):$2 $mount_dir
+      shift
+      ;;
+    umount)
+      diskutil umount ~/mnt/cloudbook-pro
+      shift
+      ;;
+    cp)
+      ssh $(cloudbook-pro ip) "cat /dev/shm/vim/s.reg" | pbcopy
+      shift
+      ;;
+    pull-secrets)
+      cloud_secrets=$(cloudbook-pro env MYBASH_SECRETS_DIR)
+      local_secrets=$MYBASH_SECRETS_DIR
+      rsync -av $(cloudbook-pro ip):$cloud_secrets/ $local_secrets/
+      shift
+      ;;
+    push-secrets)
+      cloud_secrets=$(cloudbook-pro env MYBASH_SECRETS_DIR)
+      local_secrets=$MYBASH_SECRETS_DIR
+      rsync -av $local_secrets/ $(cloudbook-pro ip):$cloud_secrets/
+      shift
+      ;;
+    scale-up)
+      machine_type=$2
+      scale $machine_type
+      shift
+      ;;
+    scale-default)
+      scale n1-standard-2
+      shift
+      ;;
+    *)
+      echo -e "Illegal parameters.\n$USAGE"
+      exit 1
+      ;;
+  esac
+  shift
+done

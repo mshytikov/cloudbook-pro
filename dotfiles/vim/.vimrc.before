@@ -1,0 +1,34 @@
+" Force Vim to use 256 colors
+set t_Co=256
+
+" Set doc format as default for rspec when running from vroom
+"let g:vroom_spec_command = 'rspec --fail-fast'
+let g:vroom_use_vimux = 1
+
+" Open new file in vertical split
+let g:ctrlp_open_new_file = 'v'
+
+" Set spell checking on
+set spell
+
+" Disable spell for yaml files
+autocmd FileType yaml setlocal nospell
+
+" Set highlighting for hql files
+au BufNewFile,BufRead *.hql set filetype=mysql
+
+" Set highlighting for jinja files
+au BufNewFile,BufRead *.jinja set filetype=yaml
+
+" Enable multiple style checkers for Ruby
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+
+" Enable multiple style checkers for Python
+let g:syntastic_python_checkers = ['python3', 'flake8']
+"let g:syntastic_python_checkers = ['python', 'flake8']
+
+" Open help in new tab
+cabbrev help tab help
+
+" Disable some plugins
+call janus#disable_plugin('snipmate')"

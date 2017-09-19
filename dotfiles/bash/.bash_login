@@ -1,0 +1,30 @@
+# vim: filetype=sh
+
+source ~/.bash_env && load_once || return 0
+
+##############################################################################
+# Environment variables
+##############################################################################
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Set dvim as default editor
+export EDITOR=dvim
+
+# set PATH so it includes user's private bin
+export PATH="$HOME/bin:$PATH"
+
+# set default project location
+export MYBASH_HOME="$HOME/cloudbook-pro"
+
+# set secrets directory for mybash-* secrets
+export MYBASH_SECRETS_DIR="$HOME/.secrets"
+
+# set cloudbook name
+export CLOUDBOOK_PRO_DEPLOYMENT="cloudbook-pro"
+
+###############################################################################
+# Setup interactive environment
+###############################################################################
+require ~/.bashrc

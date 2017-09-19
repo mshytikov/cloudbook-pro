@@ -1,0 +1,14 @@
+#!/bin/bash
+
+path=$(realpath ${1:-.})
+uid=$(id -u)
+gid=$(id -g)
+docker run -it --rm \
+  --workdir /hostfs/$(pwd) \
+  -v /:/hostfs:rw \
+  -v /tmp/tmux-$uid:/tmp/tmux-$uid:ro \
+  -v $HOME/dvim/:/dvim \
+  -v ${MYBASH_HOME}/dotfiles/:/dotfiles \
+  --user $uid:$gid \
+  mshytikov/dvim:$uid \
+  vim /hostfs$path

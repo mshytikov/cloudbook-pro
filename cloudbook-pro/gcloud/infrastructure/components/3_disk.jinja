@@ -1,0 +1,12 @@
+{% set zone = properties["zone"] %}
+{% set disk_size = properties["disk_size"] %}
+
+resources:
+- name: {{ env["name"] }}
+  type: compute.v1.disk
+  properties:
+    zone: {{ zone }}
+    description: CloudBook Pro
+    sizeGb: {{ disk_size }}
+    sourceImage: projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20170815a
+    type: zones/{{ zone }}/diskTypes/pd-ssd

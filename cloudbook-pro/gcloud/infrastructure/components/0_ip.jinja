@@ -1,0 +1,8 @@
+{% set zone = properties["zone"] %}
+{% set region = zone[:zone.rfind("-")] %}
+
+resources:
+- name: {{ env["name"] }}
+  type: compute.v1.address
+  properties:
+    region: {{ region }}

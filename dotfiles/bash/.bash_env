@@ -1,0 +1,75 @@
+# vim: filetype=sh
+#
+# Boot script for MyBash environment.
+#
+# It defines basic functions to support loading path:
+#  require   - to source files
+#  load_once - mark file as loaded. returns 1 if file was already loaded
+#
+
+[[ "${MYBASH_LOADED_SCRIPTS:-}" ]] && return 0 # skip if it is already loaded
+MYBASH_LOADED_SCRIPTS=":"
+
+###############################################################################
+# Config
+###############################################################################
+
+MYBASH_DEBUG=false
+
+###############################################################################
+# Minimalistic Logging
+###############################################################################
+
+log(){
+  local level=$1; shift
+  [[ "$level" == DEBUG && "$MYBASH_DEBUG" != true  ]] && return
+  >&2 echo "[$level] $@"
+}
+
+log_warn()  { log WARNING $@; }
+log_info()  { log INFO $@; }
+log_debug() { log DEBUG $@; }
+
+# Log some initial info
+log_debug "Hello $USER"
+
+# log is it Login shell
+shopt -q login_shell && log_debug 'Login shell' || log_debug 'Not Login shell'
+
+# log is it Interactive shell
+[[ $- == *i* ]] && log_debug 'Interactive' || log_debug 'Not Interactive'
+
+###############################################################################
+# Basic functions
+###############################################################################
+
+require() {
+  local file=$1
+
+  if [ -s $file  ]
+  then
+    log_debug "loading: $file"
+    source $file
+    return 0
+  else
+    log_warn "not sourced: $file"
+  fi
+}
+
+
+load_once() {
+  local script=${BASH_SOURCE[1]}
+  if [[ $MYBASH_LOADED_SCRIPTS =~ .*":$script".* ]]
+  then
+    log_warn "skipping already loaded $script"
+    return 1
+  else
+    MYBASH_LOADED_SCRIPTS="$MYBASH_LOADED_SCRIPTS:$script"
+    return 0
+  fi
+}
+
+
+
+# self require to make sure that we use the same style
+require ~/.bash_env

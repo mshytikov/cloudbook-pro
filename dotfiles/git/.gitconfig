@@ -1,0 +1,51 @@
+[user]
+  name = Max Shytikov
+
+[alias]
+  # Set correct email per project
+  whoami = !echo $(git config --get user.name) '<'$(git config --get user.email)'>'
+
+  my =   !git config user.email $(bash -l -c 'mybash-my-email')   && git whoami
+  work = !git config user.email $(bash -l -c 'mybash-work-email') && git whoami
+
+  s = status
+
+  # Committing
+  amend = commit --amend
+  cav = commit --all --verbose
+  cv = commit --verbose
+  cvp = commit --verbose --patch
+  fixup = commit --amend --no-edit
+  uncommit = reset --soft HEAD^
+  co = checkout --patch
+  pr-close ="! \
+git checkout master && \
+git branch -d $1 &&\
+git up && \
+git merge --no-ff origin/$1 && \
+git push  && \
+git push --delete origin $1 && \
+echo 'Pull Request has been merged:' \
+"
+
+
+  # Diff
+  cdiff = diff --cached --find-renames
+  cwdiff = diff --cached --word-diff
+  sdiff = diff --ignore-all-space --find-renames
+  wdiff = diff --word-diff
+
+  # Log
+  topology = log --oneline --graph --all --simplify-by-decoration
+  t = log --graph --decorate --pretty=oneline --abbrev-commit --all
+
+  # Updating from and pushing to remotes
+  fpush = push --force-with-lease
+  up = "!git fetch -p; git merge --ff-only @{u}"
+
+[color]
+  ui = auto
+
+[push]
+  default = simple
+  followTags = true

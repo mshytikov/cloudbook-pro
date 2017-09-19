@@ -1,0 +1,18 @@
+imports:
+- path: components/0_ip.jinja
+- path: components/1_network.jinja
+- path: components/2_firewall.jinja
+- path: components/3_disk.jinja
+- path: components/4_instance.jinja
+- path: components/cloudbook_pro.jinja
+
+resources:
+- name: cloudbook_pro
+  type: components/cloudbook_pro.jinja
+  properties:
+    ssh_ips: [ 0.0.0.0/0 ]
+    zone: europe-west1-b
+    machine_type: n1-standard-2
+    disk_size: 100
+    ssh_keys:
+    - "myuser:ssh-rsa YOUR_PUBLIC_SSH_KEY_HERE myuser@home"

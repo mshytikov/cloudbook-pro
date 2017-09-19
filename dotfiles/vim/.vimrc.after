@@ -1,0 +1,31 @@
+" Search for word under cursor in a project
+nmap <silent> <leader>s :Ack <C-R><C-W><CR>
+
+" Format format json
+map <leader>j !python -m json.tool<CR>
+
+" Zoom the tmux runner page
+map <Leader>vz :VimuxZoomRunner<CR>
+
+" Yank 's' register to the tmp file
+noremap <Leader>y "sy<CR>:call writefile(split(@s, "\n", 0), '/dvim/s.reg')<CR>
+
+" Paste 's' register from the tmp file
+noremap <Leader>p :let @s = join(readfile("/dvim/s.reg"), "\n")<CR>"sp<CR>
+
+" Set vim history to tmp file
+set viminfo+=n/dvim/.viminfo
+
+" Set vimux to use window
+let g:VimuxRunnerType = "window"
+
+" Show red line
+set colorcolumn=80
+
+" Enable inplace editing for tmp crontab file
+if $VIM_CRONTAB == "true"
+  autocmd filetype crontab setlocal nobackup nowritebackup
+endif
+
+let g:syntastic_mode_map = {'mode': 'active'}
+let g:syntastic_auto_loc_list = 0

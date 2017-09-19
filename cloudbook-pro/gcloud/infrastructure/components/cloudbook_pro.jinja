@@ -1,0 +1,22 @@
+{% set deployment = env["deployment"] %}
+
+resources:
+- name: {{ deployment }}-ip
+  type: components/0_ip.jinja
+  properties: {{ properties }}
+
+- name: {{ deployment }}-net
+  type: components/1_network.jinja
+  properties: {{ properties }}
+
+- name: {{ deployment }}-fw
+  type: components/2_firewall.jinja
+  properties: {{ properties }}
+
+- name: {{ deployment }}-disk
+  type: components/3_disk.jinja
+  properties: {{ properties }}
+
+- name: {{ deployment }}-instance
+  type: components/4_instance.jinja
+  properties: {{ properties }}
