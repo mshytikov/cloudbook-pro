@@ -1,8 +1,7 @@
 ## cloudbook-pro
 
 This is my repository of personal configuration for development env.
-
-I named it 'CloudBook-Pro'
+I named it 'CloudBook-Pro'.  Feel free to look around.
 
 ### Setup steps.
 Please review the source code before.
