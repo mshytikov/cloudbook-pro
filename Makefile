@@ -51,6 +51,7 @@ macbook-pro-setup:
 	brew ls --version git              || brew install git
 	brew ls --version coreutils        || brew install coreutils
 	brew ls --veresion bash-completion || brew install bash-completion
+	brew ls --veresion jq              || brew install jq
 
 cloudbook-pro-docker-setup:
 	which docker || cloudbook-pro/docker/setup
