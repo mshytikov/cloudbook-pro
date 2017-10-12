@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# AWS
+#
+
+uid=$(id -u)
+gid=$(id -g)
+docker run --rm -i \
+  -e HOME=$HOME \
+  -w /hostfs/$(pwd) \
+  -v /:/hostfs:rw \
+  -v $MYBASH_SECRETS_DIR/aws/:$HOME/.aws \
+  --user $uid:$gid \
+  aws/awscli $@
