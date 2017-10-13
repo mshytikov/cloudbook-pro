@@ -18,6 +18,11 @@
   fixup = commit --amend --no-edit
   uncommit = reset --soft HEAD^
   co = checkout --patch
+
+  # manage merged branches
+  branch-ls-merged = !git branch --merged | egrep  -v '(^\\*|master)'
+  branch-cleanup = !git branch-ls-merged | xargs -n 1 git branch -d
+
   pr-close ="! \
 git checkout master && \
 git branch -d $1 &&\
