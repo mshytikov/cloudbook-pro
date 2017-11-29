@@ -43,6 +43,9 @@ echo 'Pull Request has been merged:' \
   # Log
   topology = log --oneline --graph --all --simplify-by-decoration
   t = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  log-work = log --all --graph --decorate --abbrev-commit  \
+    --pretty='%C(yellow)%cd%C(reset) (%ce) %s' --date=short
+  log-my-work = !git log-work --author=$(git config --get user.email)
 
   # Updating from and pushing to remotes
   fpush = push --force-with-lease
