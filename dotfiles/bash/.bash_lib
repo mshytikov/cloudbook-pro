@@ -61,6 +61,7 @@ dc-bash() { dc run --rm --entrypoint=bash app; }
 dc-bash-ports() { dc run --rm --entrypoint=bash --service-ports app; }
 
 own-it() { sudo chown -Rv $UID:$GROUPS . ; }
+sequre-it() { sudo chmod -Rv go-rwx . ; }
 
 ###############################################################################
 # MyBash secrets setup
