@@ -4,6 +4,7 @@
 --ignore-dir=.git
 --ignore-dir=.pip
 --ignore-dir=.ansible_roles
+--ignore-dir=.ipynb_checkpoints
 --ignore-dir=.m2
 --ignore-file=ext:log
 --ignore-file=ext:sql
