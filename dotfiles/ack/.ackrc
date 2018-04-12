@@ -1,6 +1,8 @@
 --ignore-dir=.coverage
 --ignore-dir=temp
 --ignore-dir=.bundle
+--ignore-dir=.helm
+--ignore-dir=.kube
 --ignore-dir=.git
 --ignore-dir=.pip
 --ignore-dir=.ansible_roles
