@@ -50,7 +50,7 @@ do
       shift
       ;;
     port)
-      ssh -N -L $2:127.0.0.1:$2 $(cloudbook-pro ip)
+      ssh -N -L 127.0.0.1:$2:127.0.0.1:$2 $(cloudbook-pro ip)
       shift
       ;;
     env)
