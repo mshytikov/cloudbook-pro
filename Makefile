@@ -48,6 +48,7 @@ dotfiles-setup:
 
 macbook-pro-setup:
 	brew ls --versions tmux            || brew install tmux
+	brew ls --versions stow            || brew install stow
 	brew ls --version git              || brew install git
 	brew ls --version coreutils        || brew install coreutils
 	brew ls --veresion bash-completion || brew install bash-completion
