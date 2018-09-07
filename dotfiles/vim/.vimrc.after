@@ -1,6 +1,10 @@
 " Search for word under cursor in a project
 nmap <silent> <leader>s :Ack <C-R><C-W><CR>
 
+
+" Don't search in closed folds 'foldopen'
+set fdo-=search
+
 " Format format json
 map <leader>j !python -m json.tool<CR>
 
