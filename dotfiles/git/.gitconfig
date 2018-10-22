@@ -55,5 +55,5 @@ echo 'Pull Request has been merged:' \
   ui = auto
 
 [push]
-  default = current
+  default = simple
   followTags = true
