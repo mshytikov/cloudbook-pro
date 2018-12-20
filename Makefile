@@ -57,7 +57,10 @@ macbook-pro-setup:
 cloudbook-pro-docker-setup:
 	which docker || cloudbook-pro/docker/setup
 
-cloudbook-pro-setup: | cloudbook-pro-docker-setup
+cloudbook-pro-tmux-setup:
+	which tmux || cloudbook-pro/tmux/setup
+
+cloudbook-pro-setup: | cloudbook-pro-tmux-setup cloudbook-pro-docker-setup
 	sudo apt-get install git
 	sudo apt-get install htop
 	sudo apt-get install stow

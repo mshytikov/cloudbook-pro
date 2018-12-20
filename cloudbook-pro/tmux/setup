@@ -1,0 +1,18 @@
+#!/bin/bash
+# source from https://gist.githubusercontent.com/wikrie/3d871ad206fa390bb8c8d2294aa462b9/raw/c46669f1ed668526bbb71d97efa9eba4f9860212/tmux-install-2-5.sh
+#
+VERSION=2.8
+sudo apt-get -y remove tmux
+sudo apt-get -y install wget tar libevent-dev libncurses-dev
+wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
+tar xf tmux-${VERSION}.tar.gz
+rm -f tmux-${VERSION}.tar.gz
+cd tmux-${VERSION}
+./configure
+make
+sudo make install
+cd -
+sudo rm -rf /usr/local/src/tmux-*
+sudo mv tmux-${VERSION} /usr/local/src
+
+echo "Logout and login to the shell again and run"
