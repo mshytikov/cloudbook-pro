@@ -10,9 +10,9 @@ require  ~/.bash_completion
 set -o vi
 
 # History adjustments from http://goo.gl/wO8LQ
-# Increase history size
-HISTFILESIZE=10000
-HISTSIZE=5000
+# Disable history trancation
+HISTFILESIZE=-1
+HISTSIZE=-1
 
 # Write to history immediately without duplicates
 HISTCONTROL=ignoreboth
