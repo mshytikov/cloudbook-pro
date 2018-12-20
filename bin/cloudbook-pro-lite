@@ -1,0 +1,59 @@
+#!/bin/bash
+
+USAGE="Usage: cloudbook-pro-lite [ssh|mout|ip|port|cp]"
+# fast fail
+set -e
+
+IP="IP.GO.HE.RE"
+
+# sanity check
+[[ "$#" -eq 0 ]] && echo -e "Illegal number of parameters\n$USAGE" && exit 1
+
+while [[ $# > 0 ]]
+do
+  key="$1"
+
+  case $key in
+    -h|--help)
+      echo $USAGE
+      exit 1
+      ;;
+    ip)
+      echo $IP
+      shift
+      ;;
+    ssh)
+      ssh -C -A ${IP} -t tmux $2
+      shift
+      ;;
+    port)
+      ssh -N -L 127.0.0.1:$2:127.0.0.1:$2 $(cloudbook-pro ip)
+      shift
+      ;;
+    copy)
+      cmd="cat ~/dvim/s.reg"
+      ssh ${IP} $cmd | pbcopy
+      shift
+      ;;
+    mount)
+      mount_dir=~/mnt/cloudbook-pro
+      mkdir -p  $mount_dir
+      sshfs -o allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa \
+        $(cloudbook-pro ip):$2 $mount_dir
+      shift
+      ;;
+    umount)
+      diskutil umount ~/mnt/cloudbook-pro
+      shift
+      ;;
+    cp)
+      ssh ${IP} "cat /dev/shm/vim/s.reg" | pbcopy
+      shift
+      ;;
+    *)
+      echo -e "Illegal parameters.\n$USAGE"
+      exit 1
+      ;;
+  esac
+  shift
+done
