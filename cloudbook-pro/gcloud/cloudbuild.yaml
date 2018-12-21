@@ -1,0 +1,10 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'deployment-manager'
+  - 'deployments'
+  - 'update'
+  - '$BRANCH_NAME-cloudbook-pro'
+  - '--config'
+  - 'cloudbook-pro.yml'
+  dir: "cloudbook-pro/gcloud/infrastructure"
