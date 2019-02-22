@@ -31,7 +31,7 @@ Some common command examples:
 | bash (local) | `cloudbook-pro scale-default` | to scale down cloudbook-pro |
 | tmux | `Ctrl-A t` | new tab in tmux |
 | tmux | `Ctrl-A n` | new layer (session) or tabs  in tmux |
-| tmux | `Ctrl-A <h|j|k|l>` | vim binding for navigation between tmux windows/sessions |
+| tmux | `Ctrl-A <h\|j\|k\|l>` | vim binding for navigation between tmux windows/sessions |
 | tmux | `Ctrl-A d` | detach from cloudbook-pro |
 | dvim | `\ y` | to copy to persistent buffer visually selected content |
 | dvim | `\ p` | to paste from persistent buffer a content |
