@@ -14,7 +14,7 @@ MYBASH_LOADED_SCRIPTS=":"
 # Config
 ###############################################################################
 
-MYBASH_DEBUG=false
+MYBASH_LOG_LEVEL="WARNING"
 
 ###############################################################################
 # Minimalistic Logging
@@ -22,7 +22,8 @@ MYBASH_DEBUG=false
 
 log(){
   local level=$1; shift
-  [[ "$level" == DEBUG && "$MYBASH_DEBUG" != true  ]] && return
+  [[ "$MYBASH_LOG_LEVEL" == "WARNING" &&  "$level" != "WARNING"  ]] && return
+  [[ "$MYBASH_LOG_LEVEL" == "INFO" &&  "$level" == "DEBUG" ]]        && return
   >&2 echo "[$level] $@"
 }
 
@@ -61,7 +62,7 @@ load_once() {
   local script=${BASH_SOURCE[1]}
   if [[ $MYBASH_LOADED_SCRIPTS =~ .*":$script".* ]]
   then
-    log_warn "skipping already loaded $script"
+    log_info "skipping already loaded $script"
     return 1
   else
     MYBASH_LOADED_SCRIPTS="$MYBASH_LOADED_SCRIPTS:$script"
