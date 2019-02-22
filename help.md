@@ -5,6 +5,7 @@ For more details look at the source code.
 Glossary:
 
 _mybash_ - simple wrapper to provide access to content stored in `~/.secrets/mybash/`
+
 [dvim](https://github.com/mshytikov/dvim) - dockerised vim with [Janus](https://github.com/carlhuda/janus)
 
 
