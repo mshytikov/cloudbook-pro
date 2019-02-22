@@ -5,6 +5,9 @@ I named it 'CloudBook-Pro'.  Feel free to look around.
 
 Some intro slides: [here](https://www.slideshare.net/MaxShytikov/cloudbook-pro)
 
+### Commands and shortcuts
+Could be found [here](help.md)
+
 ### Setup steps.
 Please review the source code before.
 
