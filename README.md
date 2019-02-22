@@ -3,8 +3,11 @@
 This is my repository of personal configuration for development env.
 I named it 'CloudBook-Pro'.  Feel free to look around.
 
+Some intro slides: [here](https://www.slideshare.net/MaxShytikov/cloudbook-pro)
+
 ### Setup steps.
 Please review the source code before.
+The setup will replace dotfiles like `.bashrc` `.gitconfig` etc.
 
 #### Local machine
 
