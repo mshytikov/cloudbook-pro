@@ -39,12 +39,13 @@ dvim-setup:
 	docker build -t mshytikov/dvim:$$UID --build-arg UID=$$UID ./docker/dvim/local
 
 dotfiles-setup:
-	rm -rf  ~/.bashrc
 	mkdir -p ~/bin
 	stow --target ~/bin -v  bin
-	stow --dir=dotfiles --target ~ -v bash
-	stow --dir=dotfiles --target ~ -v git
-	stow --dir=dotfiles --target ~ -v tmux
+	stow --adopt --dir=dotfiles --target ~ -v bash
+	stow --adopt --dir=dotfiles --target ~ -v git
+	stow --adopt --dir=dotfiles --target ~ -v tmux
+	# Make backup to git stash for original dotfiles files
+	git diff --quiet dotfiles || git stash push -- dotfiles
 
 macbook-pro-setup:
 	brew ls --versions tmux            || brew install tmux
