@@ -71,7 +71,11 @@ do
       shift
       ;;
     umount)
-      diskutil umount ~/mnt/cloudbook-pro
+      if [ "$(uname)" == "Darwin" ]; then
+        diskutil umount ~/mnt/cloudbook-pro
+      else
+        sudo umount ~/mnt/cloudbook-pro
+      fi
       shift
       ;;
     cp)
