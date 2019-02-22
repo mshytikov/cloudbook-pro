@@ -22,6 +22,12 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+
+# Make pbcopy be available on Linux
+if [ "$(uname)" == "Linux" ];
+then
+  pbcopy() { xclip -selection  clipboard; }
+fi
 ###############################################################################
 # Google Cloud Platform
 ###############################################################################
