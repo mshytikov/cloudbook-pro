@@ -66,7 +66,7 @@ do
     mount)
       mount_dir=~/mnt/cloudbook-pro
       mkdir -p  $mount_dir
-      sshfs -o allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa \
+      sshfs -o allow_other,IdentityFile=~/.ssh/id_rsa \
         $(cloudbook-pro ip):$2 $mount_dir
       shift
       ;;
