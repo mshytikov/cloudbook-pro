@@ -33,6 +33,7 @@ Some common command examples:
 | tmux | `Ctrl-A n` | new layer (session) or tabs  in tmux |
 | tmux | `Ctrl-A <h\|j\|k\|l>` | vim binding for navigation between tmux windows/sessions |
 | tmux | `Ctrl-A d` | detach from cloudbook-pro |
+| tmux | `Ctrl-A e` | restore ssh socket after attach |
 | dvim | `\ y` | to copy to persistent buffer visually selected content |
 | dvim | `\ p` | to paste from persistent buffer a content |
 | docker | `d` | alias to docker |
