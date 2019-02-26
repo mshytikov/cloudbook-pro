@@ -34,6 +34,7 @@ Some common command examples:
 | tmux | `Ctrl-A <h\|j\|k\|l>` | vim binding for navigation between tmux windows/sessions |
 | tmux | `Ctrl-A d` | detach from cloudbook-pro |
 | tmux | `Ctrl-A e` | restore ssh socket after attach |
+| tmux | `Ctrl-A v` | tmux visual(copy) mode. Navigation same as in vim |
 | dvim | `\ y` | to copy to persistent buffer visually selected content |
 | dvim | `\ p` | to paste from persistent buffer a content |
 | docker | `d` | alias to docker |
