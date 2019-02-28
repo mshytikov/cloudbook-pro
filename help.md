@@ -32,6 +32,8 @@ Some common command examples:
 | tmux | `Ctrl-A t` | new tab in tmux |
 | tmux | `Ctrl-A n` | new layer (session) or tabs  in tmux |
 | tmux | `Ctrl-A <h\|j\|k\|l>` | vim binding for navigation between tmux windows/sessions |
+| tmux | `Ctrl-A L` | vim binding to move tab (swap window) to the right |
+| tmux | `Ctrl-A H` | vim binding to move tab (swap window) to the left |
 | tmux | `Ctrl-A d` | detach from cloudbook-pro |
 | tmux | `Ctrl-A e` | restore ssh socket after attach |
 | tmux | `Ctrl-A v` | tmux visual(copy) mode. Navigation same as in vim |
