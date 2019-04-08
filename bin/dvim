@@ -3,10 +3,15 @@
 path=$(realpath ${1:-.})
 uid=$(id -u)
 gid=$(id -g)
+tmux_dir=/tmp/tmux-$uid-test
+
+# make sure tmux dir has correct permissions.
+mkdir -p -m 700 $tmux_dir
+
 docker run -it --rm \
   --workdir /hostfs/$(pwd) \
   -v /:/hostfs:rw \
-  -v /tmp/tmux-$uid:/tmp/tmux-$uid:ro \
+  -v $tmux_dir:$tmux_dir:ro \
   -v $HOME/dvim/:/dvim \
   -v ${MYBASH_HOME}/dotfiles/:/dotfiles \
   --user $uid:$gid \
