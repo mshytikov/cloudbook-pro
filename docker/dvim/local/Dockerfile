@@ -1,4 +1,4 @@
-FROM mshytikov/dvim:latest
+FROM g1ddriver/dvim:latest
 
 ARG UID
 
