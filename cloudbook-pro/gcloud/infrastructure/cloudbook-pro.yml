@@ -10,7 +10,9 @@ resources:
 - name: cloudbook_pro
   type: components/cloudbook_pro.jinja
   properties:
-    ssh_ips: [ 0.0.0.0/0 ]
+    ssh_ips:
+      # Allow Cloud IAP for TCP forwarding
+      - 35.235.240.0/20
     zone: europe-west1-b
     machine_type: n1-standard-2
     disk_size: 100
