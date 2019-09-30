@@ -14,4 +14,4 @@ docker run --rm -i \
   -v $MYBASH_SECRETS_DIR/gcp/.gsutil:$HOME/.gsutil \
   -v $MYBASH_SECRETS_DIR/gcp/.bigqueryrc:$HOME/.bigqueryrc \
   --user $uid:$gid \
-  google/cloud-sdk $@
+  google/cloud-sdk "$@"
