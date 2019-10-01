@@ -45,6 +45,15 @@ do
       gci-ip $instance
       shift
       ;;
+    start-tunnel):
+      gcloud compute start-iap-tunnel\
+        $instance 22  --local-host-port=0.0.0.0:2222
+      shift
+      ;;
+    ssh-tunnel)
+      ssh -p 2222 -C -A 127.0.0.1 -t tmux $2
+      shift
+      ;;
     ssh)
       ssh -C -A $(cloudbook-pro ip) -t tmux $2
       shift
