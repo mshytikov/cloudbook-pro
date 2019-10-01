@@ -6,6 +6,7 @@
 uid=$(id -u)
 gid=$(id -g)
 docker run --rm -i \
+  -p 127.0.0.1:2222:2222\
   -e HOME=$HOME \
   -w /hostfs/$(pwd) \
   -v /:/hostfs:rw \
