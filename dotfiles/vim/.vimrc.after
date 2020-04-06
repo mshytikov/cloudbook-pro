@@ -24,7 +24,7 @@ set viminfo+=n/dvim/.viminfo
 let g:VimuxRunnerType = "window"
 
 " Show red line
-set colorcolumn=80
+set colorcolumn=88
 
 " Enable inplace editing for tmp crontab file
 if $VIM_CRONTAB == "true"

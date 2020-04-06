@@ -25,6 +25,7 @@ let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 
 " Enable multiple style checkers for Python
 let g:syntastic_python_checkers = ['python3', 'flake8']
+let g:syntastic_python_flake8_args='--max-line-length=88'
 "let g:syntastic_python_checkers = ['python', 'flake8']
 
 " Open help in new tab
@@ -32,3 +33,9 @@ cabbrev help tab help
 
 " Disable some plugins
 call janus#disable_plugin('snipmate')"
+
+" Just point to some folder to ignore installation
+let g:black_virtualenv="~/.janus/black"
+
+" To run Black on save
+autocmd BufWritePre *.py execute ':Black'
