@@ -45,6 +45,11 @@ gci-ip() {
 }
 
 
+# curl to google services (like CloudRun)
+gcurl() {
+    curl -s -H "Authorization: Bearer $(gcloud auth print-identity-token)" $@
+}
+
 ###############################################################################
 # Docker shortcuts
 ###############################################################################
