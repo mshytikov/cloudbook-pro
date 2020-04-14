@@ -6,7 +6,7 @@ nmap <silent> <leader>s :Ack <C-R><C-W><CR>
 set fdo-=search
 
 " Format format json
-map <leader>j !python -m json.tool<CR>
+map <leader>j !python3 -m json.tool<CR>
 
 " Zoom the tmux runner page
 map <Leader>vz :VimuxZoomRunner<CR>
