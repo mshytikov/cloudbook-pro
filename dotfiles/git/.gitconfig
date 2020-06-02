@@ -51,9 +51,16 @@ echo 'Pull Request has been merged:' \
   fpush = push --force-with-lease
   up = "!git fetch -p; git merge --ff-only @{u}"
 
+  # Pushing preview
+  fpreview = fpush origin HEAD:preview
+
 [color]
   ui = auto
 
 [push]
   default = simple
   followTags = true
+
+[rebase]
+  autosquash = true
+  missingcommitscheck = error
