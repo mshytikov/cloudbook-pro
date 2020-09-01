@@ -27,6 +27,16 @@ let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_python_checkers = ['python3', 'flake8']
 let g:syntastic_python_flake8_args='--max-line-length=88'
 
+" Use black config for Isort
+let g:vim_isort_config_overrides = {
+  \ 'include_trailing_comma': 1,
+  \ 'multi_line_output': 3,
+  \ 'force_grid_wrap': 0,
+  \ 'use_parentheses': 1,
+  \ 'ensure_newline_before_comments': 1,
+  \ 'line_length': 88
+  \}
+
 " Open help in new tab
 cabbrev help tab help
 
@@ -39,15 +49,5 @@ let g:black_virtualenv="~/.janus/black"
 " To run Black on save
 autocmd BufWritePre *.py execute ':Black'
 
-" Enable ISort mapping
-let g:vim_isort_map = '<C-i>'
-
-" Use black config
-let g:vim_isort_config_overrides = {
-  \ 'include_trailing_comma': 1,
-  \ 'multi_line_output': 3,
-  \ 'force_grid_wrap': 0,
-  \ 'use_parentheses': 1,
-  \ 'ensure_newline_before_comments': 1,
-  \ 'line_length': 88
-  \}
+" To run Isort on save
+autocmd BufWritePre *.py execute ':Isort'
