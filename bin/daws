@@ -11,4 +11,4 @@ docker run --rm -i \
   -v /:/hostfs:rw \
   -v $MYBASH_SECRETS_DIR/aws/:$HOME/.aws \
   --user $uid:$gid \
-  aws/awscli $@
+  amazon/aws-cli $@
